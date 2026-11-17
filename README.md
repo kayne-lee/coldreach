@@ -38,7 +38,9 @@ uv run coldreach find                 # look up contacts (cached, one Hunter cre
 uv run coldreach review               # recipient list + every email, sends nothing
 uv run coldreach send                 # review, confirm, send (max 20 per run)
 uv run coldreach send --dry-run       # the full send flow without sending
-uv run coldreach export               # write .eml drafts to out/ for Outlook or Apple Mail
+uv run coldreach export --csv         # out/emails.csv for a mail-merge tool to send
+uv run coldreach export --csv --mark-sent   # same, and log them as sent
+uv run coldreach export               # .eml drafts to open in Outlook or Apple Mail
 uv run coldreach followup             # show follow-ups that are due
 uv run coldreach followup --send      # send them
 uv run coldreach replied a@b.com      # stop follow-ups to someone who answered

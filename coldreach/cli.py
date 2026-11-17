@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import os
 import random
 import re
@@ -62,7 +63,7 @@ def followup_queue(args) -> list[Draft]:
         person = {k: entry.get(k, "") for k in ("email", "first_name", "last_name", "title")}
         draft = render(company, person, profile, template="followup",
                        extra={"original_subject": entry["subject"]})
-        draft.in_reply_to = entry["message_id"]
+        draft.in_reply_to = entry.get("message_id")
         queue.append(draft)
     return queue
 
@@ -156,16 +157,31 @@ def cmd_followup(args) -> None:
 
 
 def cmd_export(args) -> None:
-    """Write .eml drafts you can open in Outlook or Apple Mail and send by hand."""
+    """Hand the emails to another sender: a spreadsheet for a mail-merge tool, or .eml drafts."""
     profile = config.load_profile()
     queue = [d for d in build_queue(args) if d.sendable]
     config.OUT.mkdir(exist_ok=True)
-    for draft in queue:
-        message = sender.build_message(draft, profile)
-        message["X-Unsent"] = "1"
-        name = re.sub(r"[^a-z0-9]+", "-", f"{draft.company}-{draft.first_name}".lower()).strip("-")
-        (config.OUT / f"{name}.eml").write_bytes(bytes(message))
-    console.print(f"Wrote {len(queue)} draft(s) to {config.OUT}/. They are not logged as sent.")
+    if args.csv:
+        path = config.OUT / "emails.csv"
+        with path.open("w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["email", "first_name", "last_name", "company", "title", "subject", "body"])
+            for d in queue:
+                writer.writerow([d.to, d.first_name, d.last_name, d.company, d.title, d.subject, d.body])
+        console.print(f"Wrote {len(queue)} row(s) to {path}.")
+    else:
+        for draft in queue:
+            message = sender.build_message(draft, profile)
+            message["X-Unsent"] = "1"
+            name = re.sub(r"[^a-z0-9]+", "-", f"{draft.company}-{draft.first_name}".lower()).strip("-")
+            (config.OUT / f"{name}.eml").write_bytes(bytes(message))
+        console.print(f"Wrote {len(queue)} draft(s) to {config.OUT}/.")
+    if args.mark_sent:
+        for draft in queue:
+            sender.record(draft, None, "initial")
+        console.print("Logged as sent, so they will not be exported or emailed again.")
+    else:
+        console.print("Not logged as sent. Re-run with --mark-sent once they have gone out.")
 
 
 def cmd_replied(args) -> None:
@@ -212,8 +228,10 @@ def main() -> None:
     send_options(p)
     p.set_defaults(run=cmd_send)
 
-    p = sub.add_parser("export", help="write .eml drafts to out/ to send from your own mail app")
+    p = sub.add_parser("export", help="write a spreadsheet or .eml drafts to out/ for another tool to send")
     queue_options(p)
+    p.add_argument("--csv", action="store_true", help="one spreadsheet (out/emails.csv) for a mail-merge tool")
+    p.add_argument("--mark-sent", action="store_true", help="log these as sent so nobody is contacted twice")
     p.set_defaults(run=cmd_export)
 
     p = sub.add_parser("followup", help="one follow-up to people who have not replied")

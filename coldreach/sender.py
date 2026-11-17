@@ -53,7 +53,8 @@ def already_emailed() -> set[str]:
     return {entry["email"] for entry in load_log()}
 
 
-def record(draft: Draft, message: EmailMessage, kind: str) -> None:
+def record(draft: Draft, message: EmailMessage | None, kind: str) -> None:
+    """message is None when the email was sent by another tool (CSV export)."""
     log = load_log()
     log.append(
         {
@@ -66,7 +67,7 @@ def record(draft: Draft, message: EmailMessage, kind: str) -> None:
             "target": draft.target,
             "subject": draft.subject,
             "kind": kind,
-            "message_id": message["Message-ID"],
+            "message_id": message["Message-ID"] if message else None,
             "sent_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "replied": False,
         }
