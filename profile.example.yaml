@@ -1,0 +1,21 @@
+# Copy to profile.yaml (gitignored) and fill in. Write these the way you talk.
+first_name: Alex
+from_email: alex@example.com          # address the emails come from
+school: Waterloo
+degree: computer engineering
+graduation: April 2027
+intern_window: January to April 2027
+newgrad_start: July or August 2027
+
+# One or two sentences of proof per track. Real numbers, no adjectives.
+proof:
+  intern: >-
+    Last summer I interned at Acme, where I built the service that
+    syncs 2M orders a day, and I've shipped two side projects with real users.
+  newgrad: >-
+    I've done three internships, most recently at Acme, where I built the
+    service that syncs 2M orders a day.
+
+signature: |-
+  Alex Chen
+  github.com/alexchen | linkedin.com/in/alexchen

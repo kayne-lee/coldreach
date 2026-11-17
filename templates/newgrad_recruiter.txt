@@ -1,0 +1,13 @@
+Subject: New grad 2027, {company}
+
+Hi {first_name},
+
+I finish {degree} at {school} in {graduation} and I'm looking for a new grad software role starting {newgrad_start}. {role_line}
+
+{hook}
+
+{proof}
+
+Are you the right person to ask about this? If not, I'd appreciate a pointer to whoever is.
+
+{signature}

@@ -1,0 +1,13 @@
+Subject: Winter 2027 intern, {company}
+
+Hi {first_name},
+
+I'm in my last year of {degree} at {school} and I'm looking for a software internship from {intern_window}. {role_line}
+
+{hook}
+
+{proof}
+
+Are you the right person to ask about this? If not, I'd appreciate a pointer to whoever is.
+
+{signature}

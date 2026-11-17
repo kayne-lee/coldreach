@@ -1,0 +1,21 @@
+# Copy to companies.yaml (gitignored).
+#
+# track:  intern | newgrad
+# target: recruiter (HR / talent / campus) | founder (CEO, CTO, founders)
+#         | engineering (eng managers and leads)
+#         default: founder for intern, recruiter for newgrad
+# hook:   ONE sentence only you could write about this company. Something you
+#         used, read, or noticed. Required for founder and engineering targets.
+# role:   optional, the exact posting title if there is one.
+
+- name: Stripe
+  domain: stripe.com
+  track: newgrad
+  role: Software Engineer, New Grad
+  hook: I used Stripe Connect for payouts in a side project and the test-mode docs saved me a week.
+
+- name: Example Startup
+  domain: example.com
+  track: intern
+  target: founder
+  hook: I read your post on moving off Kubernetes and tried the same setup on my own project.

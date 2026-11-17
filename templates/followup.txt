@@ -1,0 +1,7 @@
+Subject: Re: {original_subject}
+
+Hi {first_name},
+
+Following up on my note from last week in case it got buried. I'm still keen on {company} for {what}, and I can send a resume if that would help.
+
+{signature}

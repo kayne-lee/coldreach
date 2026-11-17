@@ -1,0 +1,13 @@
+# personal data: never commit
+.env
+profile.yaml
+companies.yaml
+contacts.csv
+data/
+out/
+
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.DS_Store

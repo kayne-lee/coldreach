@@ -1,0 +1,11 @@
+Subject: Winter intern at {company}?
+
+Hi {first_name},
+
+{hook}
+
+I'm in my last year of {degree} at {school} and I'm looking for an internship from {intern_window}. {proof}
+
+Is {company} open to taking on an intern this winter? I can send a resume, or do a 15 minute call if that's easier.
+
+{signature}

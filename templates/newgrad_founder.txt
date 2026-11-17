@@ -1,0 +1,11 @@
+Subject: New grad engineer for {company}?
+
+Hi {first_name},
+
+{hook}
+
+I finish {degree} at {school} in {graduation} and I'm looking for a full-time engineering role starting {newgrad_start}. {proof}
+
+Is {company} hiring engineers for next summer? I can send a resume, or do a 15 minute call if that's easier.
+
+{signature}
